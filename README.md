@@ -58,14 +58,14 @@ jobs:
   run-tests:
 ```
 
-However, that job needs an environment to [run on](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on). Let's use Ubuntu as our environment for this `run-tests` job.
+That job needs an environment to [run on](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on). Let's use Ubuntu as our environment for this `run-tests` job.
 ```
 jobs:
   run-tests:
     runs-on: ubuntu-latest
 ```
 
-Now we just need to define the [steps](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps) our job will follow in the Ubuntu environment to run our tests. A cool part of Github Actions is that we can build from Github's existing work by using their actions library. Our first step should be to clone our work into the Ubuntu environment [using](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) Github's [checkout](https://github.com/actions/checkout) action:
+Now we just need to define the [steps](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps) our job will follow in the Ubuntu environment to run our tests. A cool part of Github Actions is that we can build from Github's existing work by using their `actions` library. Our first step should be to clone our work into the Ubuntu environment [using](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) Github's [checkout](https://github.com/actions/checkout) action:
 ```
 jobs:
   run-tests:
