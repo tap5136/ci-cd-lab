@@ -16,9 +16,9 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
-      - run: |
+        run: |
           echo Installed the following version of Go
           go version
 
       - name: Run Tests
-      - run: go test -v ./...
+        run: go test -v ./...

@@ -88,7 +88,7 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
-      - run: |
+        run: |
           echo Installed the following version of Go
           go version
 ```
@@ -106,12 +106,12 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
-      - run: |
+        run: |
           echo Installed the following version of Go
           go version
 
       - name: Run Tests
-      - run: go test -v ./...
+        run: go test -v ./...
 ```
 
 Great! Now your `test.yml` file should look something like this:
@@ -134,12 +134,12 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
-      - run: |
+        run: |
           echo Installed the following version of Go
           go version
 
       - name: Run Tests
-      - run: go test -v ./...
+        run: go test -v ./...
 ```
 
 Now push your workflow to the remote repository:
