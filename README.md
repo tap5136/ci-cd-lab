@@ -25,10 +25,10 @@ module github.com/[YOUR USERNAME]/ci-cd-lab
 go 1.16
 ```
 
-Now everything should be configured and ready for you to start the workflow lab!
+Now everything should be configured and ready for you to start the CI/CD lab!
 
 ## Step 1 - Create Workflow
-Our goal is to protect the `master` branch from faulty code. We're going to do this by creating a workflow that runs our tests whenever someone opens a Pull Request into `master`. We will then set the success of this workflow as necessary condition for merging the Pull Request into `master`.
+Our goal is to protect the `master` branch from faulty code. We're going to do this by creating a workflow that runs our tests whenever someone opens a Pull Request into `master`. We will then set the success of this workflow as a necessary condition for merging the Pull Request into `master`.
 
 To start off, let's ensure you're on the `master` branch and that everything is up-to-date.
 
@@ -37,14 +37,14 @@ git checkout master
 git pull
 ```
 
-Now, create a new file in `.github/workflows` named `test.yml`. This is where we'll define everything about our workflow does
+Now, create a new file in `.github/workflows` named `test.yml`. This is where we'll define everything about our workflow.
 
-First, set the workflow's [name](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#name) by writing the following to start off our `test.yml` file:
+First, set the workflow's [name](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#name) by writing the following at the top of our `test.yml` file:
 ```
 name: Test
 ```
 
-Next, we need to define what event(s) will trigger this workflow. To do this, we use the (required) [on](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#on) keyword. [There are many events to choose from](https://docs.github.com/en/actions/reference/events-that-trigger-workflows), but in our case we want our tests to be triggered when a Pull Request aimed at merging into `master` is opened or updated. To achieve this, we can write:
+Next, we need to define what event(s) will trigger this workflow. To do this, we use the (required) [on](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#on) keyword. [There are many events to choose from](https://docs.github.com/en/actions/reference/events-that-trigger-workflows), but in our case we want the tests to be triggered when a Pull Request aimed at merging into `master` is opened or updated. To achieve this, we can write:
 ```
 on:
   pull_request:
@@ -52,7 +52,7 @@ on:
       - master
 ```
 
-Now let's define the [jobs](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs) this workflow needs to perform. In our context, we really only need to define one job, and it's purpose is to run our tests. So let's give it the [job_id](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_id) `run-tests`:
+Now let's define the [jobs](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs) this workflow will perform. In our context, we really only need to define one job, and it's purpose is to run our tests. So let's give it the [job_id](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_id) `run-tests`:
 ```
 jobs:
   run-tests:
@@ -75,7 +75,7 @@ jobs:
         uses: actions/checkout@v2
 ```
 
-The example work in this repo is written in Go, so our second step should be to ensure that we have the proper version of Go installed. Github has an action for this too called [setup-go](https://github.com/actions/setup-go). This action takes a parameter for the version of Go we're using, so we can input that using [with](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith):
+The example work in this repo is written in Go, so our second step should be to ensure that we have the proper version of Go installed. Github has an action for this too called [setup-go](https://github.com/actions/setup-go). This action takes a parameter of the version of Go we're using; we can input that using [with](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith):
 ```
 jobs:
   run-tests:
