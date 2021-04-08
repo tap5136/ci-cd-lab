@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 ```
 
 The example work in this repo is written in Go, so our second step should be to ensure that we have the proper version of Go installed. Github has an action for this too called [setup-go](https://github.com/actions/setup-go). This action takes a parameter for the version of Go we're using, so we can input that using [with](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith). Let's also print the version of Go we just downloaded in case we want to see that later. We can do that by using [run](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun) to run generic shell scripts:
@@ -82,10 +82,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Install Go
-      - uses: actions/setup-go@v2
+        uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
         run: |
@@ -100,10 +100,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Install Go
-      - uses: actions/setup-go@v2
+        uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
         run: |
@@ -112,6 +112,7 @@ jobs:
 
       - name: Run Tests
         run: go test -v ./...
+
 ```
 
 Great! Now your `test.yml` file should look something like this:
@@ -128,10 +129,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Install Go
-      - uses: actions/setup-go@v2
+        uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
         run: |
@@ -140,6 +141,7 @@ jobs:
 
       - name: Run Tests
         run: go test -v ./...
+        
 ```
 
 Now push your workflow to the remote repository:
