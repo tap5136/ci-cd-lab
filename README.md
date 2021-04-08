@@ -185,7 +185,20 @@ If you navigate back to our PR, you'll see that a successful run of `run-tests` 
 ## Step 3 - Revision
 Nice, our workflow reports failing tests, and our repository blocks merging accordingly. Let's fix the failing code, update our PR, and see if it will let us merge in our working code.
 
+Let's see what went wrong with our tests. Navigate to `Actions > new line to prompt status check`:
+![actions tab with failure](./actions-tab-fail.png)
+
+Click the `run-tests` box to get a more detailed description of what went wrong:
+![failed run-tests description](./run-tests-fail-description.png)
+
+Here we get a description of each step in our `run-tests` job! Looks like each worked as expected, but when we ran the existing `Go` tests we got a failure:
+![failed test](./failed-test.png)
+
+Here is where you take over :)
+
+According to the test description, the `Sum(x, y)` call returned the wrong value. Go into `main.go`, find what you think the problem is, and change what you think needs to be changed. Commit and push your solution to the `test` branch, and see whether your fix caused the test to run successfully. If not, try again. If so, Github will clear you to merge `test` into `master`; once you do that the lab is complete!
+
 ## Step 4 - Revel in your newfound knowledge
-Yay! Now `master` is protected from code that fails tests. Good work!
+Yay! Now `master` passes every test and is protected from merging in code that fails tests. Good work!
 
 If you want to dive deeper into some specifics or some new concepts, check out the [Github Actions documentation](https://docs.github.com/en/actions) to round out your workflow education.
