@@ -145,24 +145,47 @@ git push
 ```
 
 ## Step 2 - Github Settings
-Now that we have our workflow set up and running, let's configure our Github repository to rely on its success before allowing pull requests to merge into `master`.
+Now that we have our workflow set up and running, let's try it out! We'll make a new branch, create a PR, and watch it fail (the pre-populated tests have a failure, this workflow failing for the right reasons means it's working). Then we will configure our Github repository to rely on a successful workflow run before allowing pull requests to merge into `master`. 
 
-In order for Github to recognize our workflow as a "status check", we need to perform an event that will trigger the workflow. Let's create a new branch:
+To do this, we need Github to recognize our workflow as a "status check". In order for Github to recognize our workflow as a "status check", we need to perform an event that will trigger the workflow. 
+
+Let's checkout a new branch:
 ```
 git checkout -b test
 ```
 
-Go to your repository's github page and navigate to `Settings > Branches > Add rule`:
+Let's make a small change to an existing file on our new branch. Open `main.go` and add a newline to the end of the file.
+
+Now let's commit that change and push our new branch to the remote repo:
+```
+git add main.go
+git commit -m "newline to prompt status check"
+git push --set-upstream origin test
+```
+
+Alright, now open a browser and visit your repo's page on Github. Open a Pull Request to merge `test` into `master`.
+![homepage](./homepage.png)
+![create pull request](./create-pr.png)
+
+Opening this PR will prompt your workflow to run. Once the workflow is done running, you'll notice that our PR shows a failed workflow run, but still allows us to merge into `master`. We're close!
+![failed pr that still allows merging](pr-fail-still-mergeable.png)
+
+Let's make sure this failure blocks merging into `master`. Navigate to `Settings > Branches > Add rule` and do the following:
 ![add a branch rule](./add-rule.png)
 
+Inform the prompt that you want this rule to apply to branches with the name `master`, then select `run-tests` as a required successful status check prior to merging.
+![customize rule](./customize-rule.png)
 
-## Step 3 - First Merge Attempt
-So our workflow is set up and Github is configured. Let's make a new branch, create a PR with failing code, and see if it works.
+Now scroll down and hit `create`
+![create rule](./create-rule.png)
 
-## Step 4 - Revision
+If you navigate back to our PR, you'll see that a successful run of `run-tests` is now a requirement for merging!
+![pull request requires successful run-tests](./pr-fail-no-merge.png)
+
+## Step 3 - Revision
 Nice, our workflow reports failing tests, and our repository blocks merging accordingly. Let's fix the failing code, update our PR, and see if it will let us merge in our working code.
 
-## Step 5 - Revel in your newfound knowledge
+## Step 4 - Revel in your newfound knowledge
 Yay! Now `master` is protected from code that fails tests. Good work!
 
 If you want to dive deeper into some specifics or some new concepts, check out the [Github Actions documentation](https://docs.github.com/en/actions) to round out your workflow education.
