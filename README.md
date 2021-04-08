@@ -37,7 +37,7 @@ git checkout master
 git pull
 ```
 
-Now, at the root of the project, we need create a `.github` folder, then a `workflows` folder inside the `.github` folder. So from your workspace you should have
+Now, at the root of the project, we need create a `.github` folder, then a `workflows` folder inside the `.github` folder.
 
 Once you have that done, create a new file in `.github/workflows/` named `test.yml`. This is where we'll define everything about our workflow.
 
