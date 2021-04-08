@@ -145,16 +145,24 @@ git push
 ```
 
 ## Step 2 - Github Settings
-Now that we have our workflow set up and running, 
+Now that we have our workflow set up and running, let's configure our Github repository to rely on its success before allowing pull requests to merge into `master`.
+
+In order for Github to recognize our workflow as a "status check", we need to perform an event that will trigger the workflow. Let's create a new branch:
+```
+git checkout -b test
+```
+
+Go to your repository's github page and navigate to `Settings > Branches > Add rule`:
+![add a branch rule](./add-rule.png)
 
 
 ## Step 3 - First Merge Attempt
-
+So our workflow is set up and Github is configured. Let's make a new branch, create a PR with failing code, and see if it works.
 
 ## Step 4 - Revision
-
+Nice, our workflow reports failing tests, and our repository blocks merging accordingly. Let's fix the failing code, update our PR, and see if it will let us merge in our working code.
 
 ## Step 5 - Revel in your newfound knowledge
-Yay! Now `master` is protected from code that fails tests. 
+Yay! Now `master` is protected from code that fails tests. Good work!
 
 If you want to dive deeper into some specifics or some new concepts, check out the [Github Actions documentation](https://docs.github.com/en/actions) to round out your workflow education.
