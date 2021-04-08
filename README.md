@@ -75,7 +75,7 @@ jobs:
         uses: actions/checkout@v2
 ```
 
-The example work in this repo is written in Go, so our second step should be to ensure that we have the proper version of Go installed. Github has an action for this too called [setup-go](https://github.com/actions/setup-go). This action takes a parameter for the version of Go we're using, so we can input that using [with](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith). Let's also print the version of Go we just downloaded in case we want to see that later. We can do that by using [run](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun) to run generic shell scripts:
+The example work in this repo is written in Go, so our second step should be to ensure that we have the proper version of Go installed. Github has an action for this too called [setup-go](https://github.com/actions/setup-go). This action takes a parameter for the version of Go we're using, so we can input that using [with](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith):
 ```
 jobs:
   run-tests:
@@ -88,12 +88,9 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
-        run: |
-          echo Installed the following version of Go
-          go version
 ```
 
-Finally, now that we have our environment set up (operating system, up-to-date code, and tester), we can actually run the tests:
+Finally, now that we have our environment set up (operating system, up-to-date code, and tester), we can actually [run](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun) the tests:
 ```
 jobs:
   run-tests:
@@ -106,9 +103,6 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
-        run: |
-          echo Installed the following version of Go
-          go version
 
       - name: Run Tests
         run: go test -v ./...
@@ -135,13 +129,10 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: "^1.16"
-        run: |
-          echo Installed the following version of Go
-          go version
 
       - name: Run Tests
         run: go test -v ./...
-        
+
 ```
 
 Now push your workflow to the remote repository:
