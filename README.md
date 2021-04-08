@@ -10,7 +10,7 @@ Fork this repository (click the "Fork" button in the upper right).
 
 ![Fork button](./fork.png)
 
-Now, clone the fork:
+Now, clone the fork. In Terminal:
 
 ```
 cd ~/[PATH TO WORKSPACE]
@@ -18,7 +18,7 @@ git clone https://github.com/[YOUR USERNAME]/ci-cd-lab.git
 cd ci-cd-lab
 ```
 
-Finally, change the module in `go.mod` to reference your fork instead of the original repo. When you've done this, your `go.mod` should look like this: 
+Finally, open `go.mod` and change the module to reference your fork instead of the original repo. When you've done this, your `go.mod` should look like this: 
 ```
 module github.com/[YOUR USERNAME]/ci-cd-lab
 
@@ -30,14 +30,16 @@ Now everything should be configured and ready for you to start the CI/CD lab!
 ## Step 1 - Create Workflow
 Our goal is to protect the `master` branch from faulty code. We're going to do this by creating a workflow that runs our tests whenever someone opens a Pull Request into `master`. We will then set the success of this workflow as a necessary condition for merging the Pull Request into `master`.
 
-To start off, let's ensure you're on the `master` branch and that everything is up-to-date.
+To start off, let's ensure you're on the `master` branch and that everything is up-to-date. In Terminal:
 
 ```
 git checkout master
 git pull
 ```
 
-Now, create a new file in `.github/workflows` named `test.yml`. This is where we'll define everything about our workflow.
+Now, at the root of the project, we need create a `.github` folder, then a `workflows` folder inside the `.github` folder. So from your workspace you should have
+
+Once you have that done, create a new file in `.github/workflows/` named `test.yml`. This is where we'll define everything about our workflow.
 
 First, set the workflow's [name](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#name) by writing the following at the top of our `test.yml` file:
 ```
@@ -135,10 +137,8 @@ jobs:
 
 ```
 
-Now push your workflow to the remote repository:
+Now push your workflow to the remote repository. In Terminal:
 ```
-git checkout master
-git pull
 git add .
 git commit -m "test workflow"
 git push
@@ -149,21 +149,21 @@ Now that we have our workflow set up and running, let's try it out! We'll make a
 
 To do this, we need Github to recognize our workflow as a "status check". In order for Github to recognize our workflow as a "status check", we need to perform an event that will trigger the workflow. 
 
-Let's checkout a new branch:
+Let's checkout a new branch. In Terminal:
 ```
 git checkout -b test
 ```
 
 Let's make a small change to an existing file on our new branch. Open `main.go` and add a newline to the end of the file.
 
-Now let's commit that change and push our new branch to the remote repo:
+Now let's commit that change and push our new branch to the remote repo. In Terminal:
 ```
 git add main.go
 git commit -m "newline to prompt status check"
 git push --set-upstream origin test
 ```
 
-Alright, now open a browser and visit your repo's page on Github. Open a Pull Request to merge `test` into `master`.
+Alright, now open a browser and visit your repo's page on Github. Open a Pull Request to merge `test` into your fork's `master` branch. *Do not merge into the ci-cd-lab repo in jakeod99, make sure you're merging into your own master branch*.
 ![homepage](./homepage.png)
 ![create pull request](./create-pr.png)
 
